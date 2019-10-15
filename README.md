@@ -1,5 +1,9 @@
 # safadeza-generator
 
+[![GitHub issues](https://img.shields.io/github/issues/bartier/safadeza-generator)](https://github.com/bartier/safadeza-generator/issues)
+[![GitHub forks](https://img.shields.io/github/forks/bartier/safadeza-generator)](https://github.com/bartier/safadeza-generator/network)
+[![GitHub stars](https://img.shields.io/github/stars/bartier/safadeza-generator)](https://github.com/bartier/safadeza-generator/stargazers)
+
 ## Objetivo
 Esse projeto utiliza uma lista de verbos e uma lista de palavras para gerar atos libidinosos conforme a regra abaixo.
 
