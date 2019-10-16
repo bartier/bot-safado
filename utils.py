@@ -4,7 +4,6 @@ import argparse
 
 def main(entrada, saida):
     # Trata o arquivo palavras.txt para remover os verbos (palavras terminadas em ar,er,ir)
-    start = time.time()
 
     # Ler todas as palavras do arquivo de entrada
     with open(entrada, 'r') as arquivo:
