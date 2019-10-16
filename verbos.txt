@@ -199,7 +199,6 @@ surgir
 perguntar
 aceitar
 terminar
-destruir
 perceber
 imaginar
 ceder
@@ -787,7 +786,6 @@ classificar
 escorregar
 consolar
 finalizar
-forçar
 pregar
 circular
 alertar
@@ -850,7 +848,6 @@ desperdiçar
 escapar
 cavar
 catar
-ofender
 emagrecer
 gravar
 frequentar
@@ -2795,7 +2792,6 @@ dissociar
 sagrar
 alar
 aprazar
-ejacular
 rifar
 estear
 frutificar
@@ -4991,4 +4987,3 @@ arrepelar
 avelar
 chilrar
 despersuadir
-ensanguentar
