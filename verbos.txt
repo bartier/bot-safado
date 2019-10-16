@@ -890,7 +890,6 @@ atar
 recusar
 colecionar
 tolher
-denegrir
 estragar
 arrancar
 motivar
