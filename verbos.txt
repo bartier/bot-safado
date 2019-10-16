@@ -1410,7 +1410,6 @@ contagiar
 aniquilar
 erradicar
 exemplificar
-suicidar
 locar
 chocar
 captar
