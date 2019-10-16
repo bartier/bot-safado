@@ -2298,9 +2298,7 @@ pelear
 sobrepujar
 desertar
 enojar
-estuprar
 ruidar
-aterrorizar
 contrastar
 sofrear
 voltear
@@ -2338,7 +2336,6 @@ endossar
 desmascarar
 later
 metamorfosear
-rematar
 enrijecer
 congregar
 espionar
@@ -2958,7 +2955,6 @@ desgostar
 empestear
 voluntariar
 destroçar
-esquartejar
 gotejar
 manar
 plantear
@@ -3465,7 +3461,6 @@ desmobiliar
 pruir
 cevar
 descolorar
-estuporar
 golfar
 patrulhar
 retrogredir
