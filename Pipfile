@@ -8,6 +8,8 @@ verify_ssl = true
 [packages]
 tweepy = "*"
 dicio = "*"
+python-dotenv = "*"
+click = "*"
 
 [requires]
 python_version = "3.7"

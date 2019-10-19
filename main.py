@@ -2,57 +2,12 @@
 # -*- coding: utf-8 -*-
 import random
 import tweepy
-import sys
+import click
 import os
 from dicio import Dicio
-
-consumer_key = os.environ.get('consumer_key')
-consumer_secret = os.environ.get('consumer_secret')
-
-access_token = os.environ.get('access_token')
-access_token_secret = os.environ.get('access_token_secret')
-
-print('consumer_key=' + consumer_key)
-print('consumer_secret=' + consumer_secret)
-print('access_token=' + access_token)
-print('access_token_secret=' + access_token_secret + "\n")
+from dotenv import load_dotenv
 
 dicio = Dicio()
-
-
-def OAuth():
-    try:
-        auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-        auth.set_access_token(access_token, access_token_secret)
-        return auth
-    except Exception as e:
-        return None
-
-
-def main():
-    verbo_escolhido = escolher_verbo()
-    print('Verbo escolhido --> ' + verbo_escolhido)
-
-    palavra_escolhida = escolher_palavra()
-    print('Palavra escolhida --> ' + palavra_escolhida + '\n')
-
-    frase = gerar_frase(palavra_escolhida, verbo_escolhido)
-    print('Frase  --> ' + frase + '\n')
-
-    oauth = OAuth()
-    api = tweepy.API(oauth)
-
-    if (len(sys.argv) > 1 and sys.argv[1] == '--post-to-twitter'):
-
-        try:
-            api.update_status(frase)
-        except Exception as e:
-            print('Não foi possível postar no Twitter, verifique o processo de autenticação.')
-            exit(1)
-
-        print('\nEnviado ao twitter o post.')
-    else:
-        print('Não foi utilizado a flag --post-to-twitter para enviar a frase para o Twitter.')
 
 
 def gerar_frase(palavra_escolhida, verbo_escolhido):
@@ -79,8 +34,7 @@ def verifica_genero(palavra, resultado_dicio):
 
             resultado_dicio_singular = dicio.search(palavra_singular)
 
-            retorno = verifica_genero(palavra_singular, resultado_dicio_singular)
-            return retorno
+            return verifica_genero(palavra_singular, resultado_dicio_singular)
     except:
         if palavra.endswith('a'):
             return 'f'
@@ -92,18 +46,66 @@ def eh_plural(resultado_dicio):
     return resultado_dicio.extra.get('Singular') is not None
 
 
-def escolher_palavra():
-    with open('palavras_sem_verbos.txt') as palavras_sem_verbos:
+def escolher_palavra(arquivo_palavras_sem_verbos):
+    with open(arquivo_palavras_sem_verbos) as palavras_sem_verbos:
         lista_palavras_sem_verbos = palavras_sem_verbos.read().split('\n')
         palavra_escolhida = random.choice(lista_palavras_sem_verbos)
     return palavra_escolhida
 
 
-def escolher_verbo():
-    with open('verbos.txt') as verbos:
-        lista_verbos = verbos.read().split('\n')
-        verbo_escolhido = random.choice(lista_verbos)
-    return verbo_escolhido
+def escolher_verbo(arquivo_verbo):
+    try:
+        with open(arquivo_verbo) as verbos:
+            lista_verbos = verbos.read().split('\n')
+            verbo_escolhido = random.choice(lista_verbos)
+        return verbo_escolhido
+    except Exception as e:
+        print('Verifique os arquivos de verbos.')
+
+
+
+@click.command()
+@click.option("--count", default=1, help="Quantidade de frases que deve ser gerada")
+@click.option("--saida", default=None,
+              help="Arquivo onde as frases geradas são guardadas e posteriormente consumidas pelo enviar_tweet.py. Por default utiliza arquivo .env "
+                   "com a config 'arquivo_frases'. Caso seja passado a flag --saida, o arquivo será o definido pela flag, isto é, a flag possui mais prioridade ")
+def main(count, saida):
+    """ Gerador de frases de atos libidinosos. """
+    load_dotenv()
+
+    if saida is None:
+        saida = os.environ.get('arquivo_frases')
+
+    arquivo_verbos = os.environ.get("arquivo_verbos")
+    arquivo_palavras = os.environ.get("arquivo_palavras_sem_verbos")
+
+    print('Arquivo onde será salvo as frases: ' + saida)
+
+    frases_geradas = []
+
+    for i in range(count):
+        print(str(i + 1) + ".")
+        verbo_escolhido = escolher_verbo(arquivo_verbos)
+        print('Verbo escolhido --> ' + verbo_escolhido)
+
+        palavra_escolhida = escolher_palavra(arquivo_palavras)
+        print('Palavra escolhida --> ' + palavra_escolhida + '\n')
+
+        frase = gerar_frase(palavra_escolhida, verbo_escolhido)
+        print('Frase  --> ' + frase + '\n')
+        frases_geradas.append(frase)
+
+    if not os.path.exists(os.path.dirname(saida)):
+        diretorio_para_criar = os.path.dirname(saida)
+        try:
+            os.mkdir(diretorio_para_criar)
+        except OSError as e:
+            print('ERRO: Não foi possível criar o diretório ' + diretorio_para_criar)
+            exit(1)
+
+    with open(saida, 'w+') as f:
+        for frase in frases_geradas:
+            f.write("%s\n" % frase)
 
 
 if __name__ == "__main__":
