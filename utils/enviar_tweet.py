@@ -46,11 +46,11 @@ def main(arquivo_input):
     access_token = os.environ.get('access_token')
     access_token_secret = os.environ.get('access_token_secret')
 
-    print('consumer_key=' + consumer_key)
-    print('consumer_secret=' + consumer_secret)
-    print('access_token=' + access_token)
-    print('access_token_secret=' + access_token_secret + "\n")
-    print('arquivo_input=' + arquivo_input + "\n")
+    print('consumer_key=' + str(consumer_key))
+    print('consumer_secret=' + str(consumer_secret))
+    print('access_token=' + str(access_token))
+    print('access_token_secret=' + str(access_token_secret) + "\n")
+    print('arquivo_input=' + str(arquivo_input) + "\n")
 
     oauth = OAuth(consumer_key, consumer_secret, access_token, access_token_secret)
     api = tweepy.API(oauth)
