@@ -22,7 +22,7 @@ No diretório do projeto, monte a imagem do docker
 
 `docker build -t safadeza-generator .`
 
-E execute o safadeza-generator
+E execute a imagem safadeza-generator 
 
 `docker run --rm safadeza-generator`
 
