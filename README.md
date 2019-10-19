@@ -10,7 +10,21 @@ Esse projeto utiliza uma lista de verbos e uma lista de palavras para gerar atos
 
 [![Resumo](https://user-images.githubusercontent.com/18057391/66723183-828f3980-edec-11e9-92dd-9c4a5215f2d8.png)](https://twitter.com/RamsesErebro/status/1104507809029328898)
 
-Cada ato libidinoso gerado pelo algoritmo está sendo postado no [perfil do Bot no Twitter de tempo em tempo.](https://twitter.com/botsafado). 
+Cada ato libidinoso gerado pelo algoritmo está sendo postado no [perfil do Bot no Twitter de tempo em tempo.](https://twitter.com/botsafado).
+
+## Configurando o projeto
+
+Para configurar o projeto, clone o repositório 
+
+`git clone https://github.com/bartier/safadeza-generator.git`
+
+No diretório do projeto, monte a imagem do docker
+
+`docker build -t safadeza-generator .`
+
+E execute a imagem safadeza-generator 
+
+`docker run --rm safadeza-generator`
 
 ## Contribuindo
 
@@ -36,3 +50,4 @@ o qual possui o arquivo [palavras.txt](https://github.com/WyrmDT/fodasebot/blob/
 possui verbos, sendo assim, foi gerado um filtro utilizando o script [utils.py](https://github.com/bartier/safadeza-generator/blob/master/utils.py) para
 percorrer o arquivo e gerar um novo arquivo, o [palavras_sem_verbos.txt](https://github.com/bartier/safadeza-generator/blob/master/palavras_sem_verbos.txt), que é o arquivo
 utilizado.
+
