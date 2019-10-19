@@ -55,20 +55,23 @@ def main():
 
 
 def gerar_frase(palavra_escolhida, verbo_escolhido):
-    genero = verifica_genero(palavra_escolhida)
-    if genero == 'f':
-        frase = verbo_escolhido + ' a ' + palavra_escolhida
-    else:
-        frase = verbo_escolhido + ' o ' + palavra_escolhida
+    resultado_dicio = dicio.search(palavra_escolhida)
+
+    genero = verifica_genero(palavra_escolhida, resultado_dicio)
+
+    artigo = 'a' if genero == 'f' else 'o'
+    artigo += 's' if eh_plural(resultado_dicio) else ''
+
+    frase = verbo_escolhido + ' ' + artigo + ' ' + palavra_escolhida
+
     return frase
 
 
-def verifica_genero(palavra):
-    significado = dicio.search(palavra)
+def verifica_genero(palavra, resultado_dicio):
     try:
-        if 'masculino' in significado.extra['Classe gramatical']:
+        if 'masculino' in resultado_dicio.extra['Classe gramatical']:
             return 'm'
-        elif 'feminino' in significado.extra['Classe gramatical']:
+        elif 'feminino' in resultado_dicio.extra['Classe gramatical']:
             return 'f'
     except:
         if palavra.endswith('a'):
@@ -76,6 +79,8 @@ def verifica_genero(palavra):
         else:
             return 'm'
  
+def eh_plural(resultado_dicio): 
+    return resultado_dicio.extra.get('Singular') is not None
 
 def escolher_palavra():
     with open('palavras_sem_verbos.txt') as palavras_sem_verbos:
