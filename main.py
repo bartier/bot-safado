@@ -6,18 +6,19 @@ import sys
 import os
 from dicio import Dicio
 
-consumer_key = os.environ['consumer_key']
-consumer_secret =  os.environ['consumer_secret']
+consumer_key = os.environ.get('consumer_key')
+consumer_secret = os.environ.get('consumer_secret')
 
-access_token =  os.environ['access_token']
-access_token_secret =  os.environ['access_token_secret']
+access_token = os.environ.get('access_token')
+access_token_secret = os.environ.get('access_token_secret')
 
-print(consumer_key)
-print(consumer_secret)
-print(access_token)
-print(access_token_secret)
+print('consumer_key=' + consumer_key)
+print('consumer_secret=' + consumer_secret)
+print('access_token=' + access_token)
+print('access_token_secret=' + access_token_secret + "\n")
 
 dicio = Dicio()
+
 
 def OAuth():
     try:
@@ -73,14 +74,23 @@ def verifica_genero(palavra, resultado_dicio):
             return 'm'
         elif 'feminino' in resultado_dicio.extra['Classe gramatical']:
             return 'f'
+        elif resultado_dicio.extra.get("Singular") is not None:
+            palavra_singular = resultado_dicio.extra.get("Singular")
+
+            resultado_dicio_singular = dicio.search(palavra_singular)
+
+            retorno = verifica_genero(palavra_singular, resultado_dicio_singular)
+            return retorno
     except:
         if palavra.endswith('a'):
             return 'f'
         else:
             return 'm'
- 
-def eh_plural(resultado_dicio): 
+
+
+def eh_plural(resultado_dicio):
     return resultado_dicio.extra.get('Singular') is not None
+
 
 def escolher_palavra():
     with open('palavras_sem_verbos.txt') as palavras_sem_verbos:
