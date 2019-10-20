@@ -5,7 +5,6 @@ import tweepy
 import click
 import os
 from dicio import Dicio
-from dotenv import load_dotenv
 
 dicio = Dicio()
 
@@ -61,23 +60,20 @@ def escolher_verbo(arquivo_verbo):
         return verbo_escolhido
     except Exception as e:
         print('Verifique os arquivos de verbos.')
+        exit(1)
 
 
 
 @click.command()
 @click.option("--count", default=1, help="Quantidade de frases que deve ser gerada")
-@click.option("--saida", default=None,
-              help="Arquivo onde as frases geradas são guardadas e posteriormente consumidas pelo enviar_tweet.py. Por default utiliza arquivo .env "
-                   "com a config 'arquivo_frases'. Caso seja passado a flag --saida, o arquivo será o definido pela flag, isto é, a flag possui mais prioridade ")
-def main(count, saida):
+@click.option("--saida", required=True,
+              help="Arquivo onde deve ser guardadas as frases geradas.")
+@click.option("--verbos", required=True,
+              help="Arquivo de verbos.")
+@click.option("--palavras", required=True,
+              help="Arquivo de palavras sem verbos.")
+def main(count, saida, verbos, palavras):
     """ Gerador de frases de atos libidinosos. """
-    load_dotenv()
-
-    if saida is None:
-        saida = os.environ.get('arquivo_frases')
-
-    arquivo_verbos = os.environ.get("arquivo_verbos")
-    arquivo_palavras = os.environ.get("arquivo_palavras_sem_verbos")
 
     print('Arquivo onde será salvo as frases: ' + saida)
 
@@ -85,10 +81,10 @@ def main(count, saida):
 
     for i in range(count):
         print(str(i + 1) + ".")
-        verbo_escolhido = escolher_verbo(arquivo_verbos)
+        verbo_escolhido = escolher_verbo(verbos)
         print('Verbo escolhido --> ' + verbo_escolhido)
 
-        palavra_escolhida = escolher_palavra(arquivo_palavras)
+        palavra_escolhida = escolher_palavra(palavras)
         print('Palavra escolhida --> ' + palavra_escolhida + '\n')
 
         frase = gerar_frase(palavra_escolhida, verbo_escolhido)
@@ -97,11 +93,12 @@ def main(count, saida):
 
     if not os.path.exists(os.path.dirname(saida)):
         diretorio_para_criar = os.path.dirname(saida)
-        try:
-            os.mkdir(diretorio_para_criar)
-        except OSError as e:
-            print('ERRO: Não foi possível criar o diretório ' + diretorio_para_criar)
-            exit(1)
+        if diretorio_para_criar != "":
+            try:
+                os.mkdir(diretorio_para_criar)
+            except OSError as e:
+                print('ERRO: Não foi possível criar o diretório ' + diretorio_para_criar)
+                exit(1)
 
     with open(saida, 'w+') as f:
         for frase in frases_geradas:

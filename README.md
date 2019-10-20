@@ -24,7 +24,9 @@ No diretório do projeto, monte a imagem do docker
 
 E execute a imagem safadeza-generator 
 
-`docker run --rm safadeza-generator`
+`docker run --rm -v /safadeza-generator/:/safadeza-generator/ safadeza-generator`
+
+O arquivo de output será salvo em `/safadeza-generator/frases.txt`.
 
 ## Contribuindo
 
