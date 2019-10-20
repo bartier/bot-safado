@@ -19,4 +19,4 @@ ENV access_token_secret=$access_token_secret
 
 COPY . /app
 WORKDIR /app
-CMD python main.py --verbos utils/verbos.txt --palavras utils/palavras_sem_verbos.txt --saida "/safadeza-generator/frases.txt"
+CMD python main.py --verbos utils/verbos_filtrados.txt --palavras utils/palavras_filtradas.txt --saida "/safadeza-generator/frases.txt"
