@@ -49,7 +49,14 @@ Foi utilizado o framework [Scrapy](http://scrapy.org/) como base.
 
 A lista de palavras (que não são verbos, é claro) foi obtida através do repositório do [fodasebot](https://github.com/WyrmDT/fodasebot),
 o qual possui o arquivo [palavras.txt](https://github.com/WyrmDT/fodasebot/blob/master/palavras.txt). No entanto essa listagem
-possui verbos, sendo assim, foi gerado um filtro utilizando o script [utils.py](https://github.com/bartier/safadeza-generator/blob/master/utils.py) para
-percorrer o arquivo e gerar um novo arquivo, o [palavras_sem_verbos.txt](https://github.com/bartier/safadeza-generator/blob/master/palavras_sem_verbos.txt), que é o arquivo
+possui verbos, sendo assim, foi gerado um filtro utilizando o script [gerar_palavras_sem_verbos.py](https://github.com/bartier/safadeza-generator/blob/master/utils/gerar_palavras_sem_verbos.py) para
+percorrer o arquivo e gerar um novo arquivo, o [palavras_sem_verbos.txt](https://github.com/bartier/safadeza-generator/blob/master/utils/palavras_sem_verbos.txt), que é o arquivo
 utilizado.
 
+## Como foram filtradas as palavras ofensivas?
+
+A lista de palavras ofensivas foi obdito atráves do fórum da [Comunidade do Hardware](https://www.hardware.com.br/comunidade/lista-palavroes/1456601/).
+Após algumas normalizaçoes e verbos adicionados manualmente, foi gerado o arquivo final [palavras_ofensivas.txt](https://github.com/WyrmDT/fodasebot/blob/master/utils/palavras_ofensivas.txt).
+Por fim, foi utilizado o script [filtrar_palavras_ofensivas.py](https://github.com/bartier/safadeza-generator/blob/master/utils/filtrar_palavras_ofensivas.py) para
+percorrer o arquivo de verbos e palavras e gerar novos arquivos filtrados: [palavras_filtradas.txt](https://github.com/bartier/safadeza-generator/blob/master/utils/palavras_filtradas.txt)
+e [verbos_filtrados.txt](https://github.com/bartier/safadeza-generator/blob/master/utils/verbos_filtrados.txt).
