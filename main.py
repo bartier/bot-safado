@@ -10,6 +10,9 @@ dicio = Dicio()
 
 
 def gerar_frase(palavra_escolhida, verbo_escolhido):
+    if not palavra_escolhida.isalpha() or not verbo_escolhido.isalpha():
+        raise Exception
+
     resultado_dicio = dicio.search(palavra_escolhida)
 
     genero = verifica_genero(palavra_escolhida, resultado_dicio)
@@ -87,9 +90,12 @@ def main(count, saida, verbos, palavras):
         palavra_escolhida = escolher_palavra(palavras)
         print('Palavra escolhida --> ' + palavra_escolhida + '\n')
 
-        frase = gerar_frase(palavra_escolhida, verbo_escolhido)
-        print('Frase  --> ' + frase + '\n')
-        frases_geradas.append(frase)
+        try:
+            frase = gerar_frase(palavra_escolhida, verbo_escolhido)
+            print('Frase  --> ' + frase + '\n')
+            frases_geradas.append(frase)
+        except Exception:
+            print('Não é possível gerar a frase')
 
     if not os.path.exists(os.path.dirname(saida)):
         diretorio_para_criar = os.path.dirname(saida)
