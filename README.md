@@ -1,4 +1,4 @@
-# safadeza-generator
+# bot-safado
 
 [![GitHub issues](https://img.shields.io/github/issues/bartier/safadeza-generator)](https://github.com/bartier/safadeza-generator/issues)
 [![GitHub forks](https://img.shields.io/github/forks/bartier/safadeza-generator)](https://github.com/bartier/safadeza-generator/network)
