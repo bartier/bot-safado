@@ -45,6 +45,11 @@ Lembre-se de manter sua Pull Request focada em um objetivo, mantendo as boas pr�
 **Por favor, pergunte primeiro pela aba Issues** antes de iniciar uma alteração significante no projeto, caso contrário, você corre o risco de perder muito tempo em um trabalho
 que pode não ser aceito caso não esteja dentre o esperado.
 
+## Mês de lançamento
+
+![image](https://user-images.githubusercontent.com/18057391/78324130-3080d280-754a-11ea-9ec1-4b4db7b9df3a.png)
+
+
 ## Como foi gerado a lista de verbos?
 
 Foi utilizado um crawler para obter uma listagem do site [Conjugacao](http://conjugacao.com.br/). Caso tenha mais interesse, acesse o
