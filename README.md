@@ -22,17 +22,17 @@ Cada ato libidinoso gerado pelo algoritmo está sendo postado no [perfil do Bot 
 
 Para configurar o projeto, clone o repositório 
 
-`git clone https://github.com/bartier/safadeza-generator.git`
+`git clone https://github.com/bartier/bot-safado.git`
 
 No diretório do projeto, monte a imagem do docker
 
-`docker build -t safadeza-generator .`
+`docker build -t bot-safado .`
 
-E execute a imagem safadeza-generator 
+E execute a imagem bot-safado 
 
-`docker run --rm -v /safadeza-generator/:/safadeza-generator/ safadeza-generator`
+`docker run --rm -v /var/lib/bot-safado/:/app/output/ bot-safado`
 
-O arquivo de output será salvo em `/safadeza-generator/frases.txt`.
+O arquivo de output será salvo em `/var/lib/bot-safado/frases.txt` no seu host local.
 
 ## Contribuindo
 

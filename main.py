@@ -1,11 +1,8 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 import random
-import tweepy
 import click
 import os
-from dicio import Dicio
 
+from dicio import Dicio
 dicio = Dicio()
 
 
@@ -95,7 +92,7 @@ def main(count, saida, verbos, palavras):
             print('Frase  --> ' + frase + '\n')
             frases_geradas.append(frase)
         except Exception:
-            print('Não é possível gerar a frase')
+            print('Não foi possível gerar a frase')
 
     if not os.path.exists(os.path.dirname(saida)):
         diretorio_para_criar = os.path.dirname(saida)
@@ -106,7 +103,7 @@ def main(count, saida, verbos, palavras):
                 print('ERRO: Não foi possível criar o diretório ' + diretorio_para_criar)
                 exit(1)
 
-    with open(saida, 'w+') as f:
+    with open(saida, 'a') as f:
         for frase in frases_geradas:
             f.write("%s\n" % frase)
 
